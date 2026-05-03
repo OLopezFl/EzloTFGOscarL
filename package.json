@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "type": "module",
+  "name": "ezlo-limpiezas",
+  "version": "1.0.0",
+  "description": "Ezlo Limpiezas — Laravel API + React (Vite)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "React",
+    "Vite",
+    "Laravel",
+    "Limpieza",
+    "TFG"
+  ],
+  "author": "Oscar López Ezquerro",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "laravel-vite-plugin": "^1.3.0",
+    "vite": "^5.0.8"
+  }
+}
