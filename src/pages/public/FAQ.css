@@ -12,6 +12,7 @@
     var(--img-lobby) center 40% / cover no-repeat;
   margin-top: 0;
   padding: clamp(2rem, 4vw, 3rem) 0;
+  padding-top: calc(var(--header-bar, 76px) + clamp(2rem, 4vw, 3rem));
   text-align: left;
   display: flex;
   align-items: center;
@@ -215,13 +216,11 @@
 
 @media (max-width: 700px) {
   .faq-hero {
-    margin-top: 0;
     min-height: 360px;
-    padding: calc(2.9rem + 72px) 0 1.8rem;
   }
 
   .faq-hero-content h1 {
-    font-size: clamp(1.9rem, 8vw, 2.4rem);
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
   }
 
   .faq-hero-content p {
@@ -278,12 +277,11 @@
 
 @media (max-width: 480px) {
   .faq-hero {
-    min-height: 280px;
-    padding: calc(2.2rem + 72px) 0 1.4rem;
+    min-height: 300px;
   }
 
   .faq-hero-content h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 8vw, 1.9rem);
   }
 
   .faq-hero-content p {

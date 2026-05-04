@@ -10,6 +10,7 @@
   contain: paint;
   margin-top: 0;
   padding: clamp(2rem, 4vw, 3rem) var(--layout-gutter);
+  padding-top: calc(var(--header-bar, 76px) + clamp(2rem, 4vw, 3rem));
   background:
     linear-gradient(125deg, rgba(5, 14, 9, 0.86) 0%, rgba(8, 22, 14, 0.60) 48%, rgba(10, 26, 16, 0.64) 100%),
     var(--img-lobby) 30% center / cover no-repeat;
@@ -261,13 +262,11 @@
 
 @media (max-width: 768px) {
   .contact-hero {
-    margin-top: 0;
     min-height: 360px;
-    padding: calc(2.9rem + 72px) 0.6rem 1.6rem;
   }
 
   .contact-hero h1 {
-    font-size: 1.95rem;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
   }
 
   .contact-hero p {
@@ -324,11 +323,10 @@
 @media (max-width: 480px) {
   .contact-hero {
     min-height: 300px;
-    padding: calc(2.4rem + 72px) 0.7rem 1.4rem;
   }
 
   .contact-hero h1 {
-    font-size: 1.75rem;
+    font-size: clamp(1.4rem, 8vw, 1.9rem);
   }
 
   .contact-hero p {
