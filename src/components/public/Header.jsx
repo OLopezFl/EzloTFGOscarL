@@ -45,7 +45,7 @@ export default function Header() {
           type="button"
           className="menu-toggle"
           aria-expanded={menuOpen}
-          aria-label="Abrir o cerrar menÃº"
+          aria-label="Abrir o cerrar menú"
           onClick={() => setMenuOpen((prev) => !prev)}
         >
           <span />

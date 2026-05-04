@@ -125,9 +125,13 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
   padding: 1.4rem 1rem 1rem;
   color: #d9ece1;
   animation: fadeScaleIn var(--dur-slow) var(--ease-soft) both;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-brand {
@@ -197,6 +201,9 @@
 
 .sidebar-user-trigger {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   border: 1px solid transparent;
   color: inherit;
   text-align: left;
@@ -1256,6 +1263,8 @@
 .stack-form input,
 .stack-form select {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   min-height: 44px;
   border-radius: 10px;
   border: 1px solid var(--line-200);
@@ -3473,6 +3482,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

@@ -343,6 +343,7 @@ export default function Dashboard() {
   const inboxPollingReadyRef = useRef(false);
   const dragPayloadRef = useRef(null);
   const dashboardMainRef = useRef(null);
+  const profileAvatarInputRef = useRef(null);
   const [trabajoForm, setTrabajoForm] = useState({
     id_cliente: '',
     descripcion_tarea: '',
@@ -1046,9 +1047,9 @@ export default function Dashboard() {
     try {
       await apiRequest(`/api/formularios/${idMensaje}/estado`, {
         method: 'PATCH',
-        body: JSON.stringify({ estado: 'LeÃ­do' }),
+        body: JSON.stringify({ estado: 'Leído' }),
       });
-      showSuccess('Mensaje marcado como leÃ­do.');
+      showSuccess('Mensaje marcado como leído.');
       await loadModuleData('bandeja', { force: true, showLoader: false });
     } catch (error) {
       showError(error.message || 'No se pudo actualizar el mensaje.');
@@ -1766,7 +1767,7 @@ export default function Dashboard() {
           <select value={rangeMode} onChange={(event) => setRangeMode(event.target.value)}>
             <option value="dias">Dias</option>
             <option value="meses">Meses</option>
-            <option value="anios">AÃ±os</option>
+            <option value="anios">Años</option>
             <option value="custom">Personalizado</option>
           </select>
         </label>
@@ -1819,6 +1820,12 @@ export default function Dashboard() {
     setProfileAvatarFile(file);
     setRemoveProfileAvatar(false);
     setErrorMessage('');
+  };
+
+  const onOpenProfileAvatarPicker = () => {
+    if (!profileAvatarInputRef.current) return;
+    profileAvatarInputRef.current.value = '';
+    profileAvatarInputRef.current.click();
   };
 
   const onRemoveProfileAvatar = () => {
@@ -2153,7 +2160,7 @@ export default function Dashboard() {
               <div key={cliente.id_cliente} className="record-item">
                 <div className="record-main">
                   <p className="record-title">{cliente.nombre}</p>
-                  <p className="record-subtitle">{cliente.email || '-'} Â· {cliente.telefono || '-'}</p>
+                  <p className="record-subtitle">{cliente.email || '-'} · {cliente.telefono || '-'}</p>
                   <p className="record-subtitle">{cliente.direccion || '-'}</p>
                 </div>
                 <div className="record-actions">
@@ -2233,7 +2240,7 @@ export default function Dashboard() {
                       <p className="record-subtitle">{mensaje.remitente_email}</p>
                     </div>
                     <div className="inbox-badges">
-                      <span className={`status-chip ${mensaje.estado === 'LeÃ­do' ? 'ok' : 'pending'}`}>{mensaje.estado}</span>
+                      <span className={`status-chip ${mensaje.estado === 'Leído' ? 'ok' : 'pending'}`}>{mensaje.estado}</span>
                       <span className="inbox-meta-chip">{formatDate(mensaje.fecha_recepcion)}</span>
                     </div>
                   </div>
@@ -2255,9 +2262,9 @@ export default function Dashboard() {
                   </div>
 
                   <div className="inbox-actions">
-                    {mensaje.estado !== 'LeÃ­do' && (
+                    {mensaje.estado !== 'Leído' && (
                       <button type="button" className="action-btn" onClick={() => onMarkLeido(mensaje.id_mensaje)}>
-                        Marcar leÃ­do
+                        Marcar leído
                       </button>
                     )}
                     <button type="button" className="action-btn danger" onClick={() => onDeleteMensaje(mensaje.id_mensaje)}>
@@ -2278,7 +2285,7 @@ export default function Dashboard() {
       <section className="module-layout single">
         <article className="module-card module-page trabajos-page">
           <header className="module-header trabajos-header">
-            <h2>Plantillas de trabajo</h2>
+            <h2>Planes de trabajo</h2>
             <p>Guarda servicios tipo y generalos para X dias. La fecha es opcional: si no la pones, se crean pendientes para colocar cualquier dia.</p>
           </header>
 
@@ -2393,7 +2400,7 @@ export default function Dashboard() {
                   <div key={plantilla.id_plantilla} className="template-item">
                     <div>
                       <p className="drag-job-title">{plantilla.nombre}</p>
-                      <p className="drag-job-meta">{plantilla.cliente?.nombre || 'Cliente'} Â· {plantilla.duracion_minutos || 60} min Â· {plantilla.personas_requeridas || 1} pers</p>
+                      <p className="drag-job-meta">{plantilla.cliente?.nombre || 'Cliente'} · {plantilla.duracion_minutos || 60} min · {plantilla.personas_requeridas || 1} pers</p>
                       {plantilla.dia_semana !== null && plantilla.dia_semana !== undefined && (
                         <p className="drag-job-meta">Dia: {weekdayLabelFromNumber(plantilla.dia_semana)}</p>
                       )}
@@ -2424,7 +2431,7 @@ export default function Dashboard() {
         <section className="module-layout single">
           <article className="module-card">
             <div className="empty-state">
-              <p className="empty-state-msg">Â¡AÃ±ade un empleado para empezar!</p>
+              <p className="empty-state-msg">¡Añade un empleado para empezar!</p>
               <p className="empty-state-sub">Ve al apartado <strong>Empleados</strong> y crea el primer usuario del equipo.</p>
             </div>
           </article>
@@ -2549,7 +2556,7 @@ export default function Dashboard() {
               </form>
               <br></br>
               <h3>Pendientes para asignar</h3>
-              <p className="pending-help">En Ordenador: arrastra y suelta. En MÃ³vil: selecciona un pendiente y usa el planificador inferior.</p>
+              <p className="pending-help">En Ordenador: arrastra y suelta. En Móvil: selecciona un pendiente y usa el planificador inferior.</p>
               {selectedPendingJobId && (
                 <p className="pending-touch-hint">Pendiente seleccionado: usa Empleado + Hora y pulsa "Asignar pendiente".</p>
               )}
@@ -2681,7 +2688,7 @@ export default function Dashboard() {
                       className="calendar-mobile-item"
                     >
                       <p className="calendar-mobile-title">{row.trabajo.cliente?.nombre || 'Cliente'}</p>
-                      <p className="calendar-mobile-meta">{hourFromDate(row.start)} - {row.end ? hourFromDate(row.end) : '--:--'} Â· {row.empleadoNombre}</p>
+                      <p className="calendar-mobile-meta">{hourFromDate(row.start)} - {row.end ? hourFromDate(row.end) : '--:--'} · {row.empleadoNombre}</p>
                       <p className="calendar-mobile-meta">{row.trabajo.descripcion_tarea}</p>
                       <div className="calendar-mobile-actions">
                         <span className="status-chip pending">{estadoTrabajoLabel(row.trabajo.estado)}</span>
@@ -2748,7 +2755,7 @@ export default function Dashboard() {
                     disabled={calendarEmpleadoPage === 0}
                     onClick={() => setCalendarEmpleadoPage((p) => p - 1)}
                   >
-                    â€¹ Anterior
+                    ‹ Anterior
                   </button>
                   <span className="cal-page-info">
                     {calendarEmpleadoPage + 1} / {totalCalendarPages}
@@ -2758,7 +2765,7 @@ export default function Dashboard() {
                     disabled={calendarEmpleadoPage >= totalCalendarPages - 1}
                     onClick={() => setCalendarEmpleadoPage((p) => p + 1)}
                   >
-                    Siguiente â€º
+                    Siguiente ›
                   </button>
                 </div>
               )}
@@ -2917,7 +2924,7 @@ export default function Dashboard() {
             />
             <input
               type="password"
-              placeholder={editEmployeeId ? 'ContraseÃ±a (opcional)' : 'ContraseÃ±a'}
+              placeholder={editEmployeeId ? 'Contraseña (opcional)' : 'Contraseña'}
               value={employeeForm.password}
               onChange={(event) => setEmployeeForm((prev) => ({ ...prev, password: event.target.value }))}
               minLength={editEmployeeId ? undefined : 6}
@@ -3434,7 +3441,7 @@ export default function Dashboard() {
         <article className="module-card profile-page">
           <header className="module-header profile-header">
             <h2>Mi perfil</h2>
-            <p>Actualiza tu informacion personal, foto y contraseÃ±a.</p>
+            <p>Actualiza tu informacion personal, foto y contraseña.</p>
           </header>
 
           <form className="profile-grid" onSubmit={onSubmitProfile}>
@@ -3449,8 +3456,9 @@ export default function Dashboard() {
                 )}
               </div>
 
-              <label className="action-btn profile-file-label" htmlFor="profile-avatar-input">Subir imagen</label>
+              <button type="button" className="action-btn profile-file-label" onClick={onOpenProfileAvatarPicker}>Subir imagen</button>
               <input
+                ref={profileAvatarInputRef}
                 id="profile-avatar-input"
                 type="file"
                 accept="image/png,image/jpeg,image/webp"
@@ -3485,7 +3493,7 @@ export default function Dashboard() {
                 />
                 <input
                   type="password"
-                  placeholder="Nueva contraseÃ±a (opcional)"
+                  placeholder="Nueva contraseña (opcional)"
                   value={profileForm.password}
                   onChange={(event) => setProfileForm((prev) => ({ ...prev, password: event.target.value }))}
                   minLength={6}
@@ -3764,7 +3772,7 @@ export default function Dashboard() {
           <div className="modal-overlay" role="dialog" aria-modal="true" aria-label="Ajustar trabajo realizado">
             <div className="modal-card">
               <h3>Ajustar trabajo realizado</h3>
-              <p>{editRetrasoModal.cliente} Â· {editRetrasoModal.empleado}</p>
+              <p>{editRetrasoModal.cliente} · {editRetrasoModal.empleado}</p>
 
               <div className="profile-grid">
                 <label className="form-field">

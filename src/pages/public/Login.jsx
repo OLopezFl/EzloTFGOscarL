@@ -86,11 +86,11 @@ export default function Login() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">ContraseÃ±a</label>
+              <label htmlFor="password">Contraseña</label>
               <input
                 type="password"
                 id="password"
-                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -100,7 +100,7 @@ export default function Login() {
             <div className="form-remember">
               <label className="checkbox-label">
                 <input type="checkbox" />
-                <span>Mantener sesiÃ³n en este dispositivo</span>
+                <span>Mantener sesión en este dispositivo</span>
               </label>
             </div>
 
@@ -112,7 +112,7 @@ export default function Login() {
       </div>
 
       <div className="login-back-link">
-        <Link to={ROUTES.HOME}>â† Volver al inicio</Link>
+        <Link to={ROUTES.HOME}>← Volver al inicio</Link>
       </div>
     </div>
   );

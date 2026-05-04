@@ -73,17 +73,17 @@ export default function Contact() {
         <div className="contact-hero-inner">
           <p className="contact-eyebrow">CONTACTO</p>
           <h1>Hablemos de tu espacio</h1>
-          <p>CuÃ©ntanos quÃ© necesitas y te orientamos de forma clara, sin compromiso.</p>
+          <p>Cuéntanos qué necesitas y te orientamos de forma clara, sin compromiso.</p>
         </div>
       </section>
 
       <section className="contact-section">
         <div className="contact-layout">
           <form className="contact-form" onSubmit={handleSubmit}>
-            {submitted && <div className="success-message">âœ“ Mensaje enviado. Te contestamos en breve.</div>}
+            {submitted && <div className="success-message">✓ Mensaje enviado. Te contestamos en breve.</div>}
             {submitError && <div className="success-message" style={{ background: '#fff1f2', borderColor: '#fecdd3', color: '#9f1239' }}>{submitError}</div>}
             <h2>Pide tu presupuesto</h2>
-            <p className="contact-form-lead">Con unos datos bÃ¡sicos podemos enviarte una propuesta ajustada y realista.</p>
+            <p className="contact-form-lead">Con unos datos básicos podemos enviarte una propuesta ajustada y realista.</p>
             
             <div className="form-group">
               <label htmlFor="nombre">
@@ -92,7 +92,7 @@ export default function Contact() {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  placeholder="CÃ³mo te llamas"
+                  placeholder="Cómo te llamas"
                   value={formData.nombre}
                   onChange={handleChange}
                   required
@@ -102,12 +102,12 @@ export default function Contact() {
 
             <div className="form-row">
               <label htmlFor="telefono">
-                <span>TelÃ©fono</span>
+                <span>Teléfono</span>
                 <input
                   type="tel"
                   id="telefono"
                   name="telefono"
-                  placeholder="Tu telÃ©fono"
+                  placeholder="Tu teléfono"
                   value={formData.telefono}
                   onChange={handleChange}
                 />
@@ -131,7 +131,7 @@ export default function Contact() {
               <select name="tipo" id="tipo" value={formData.tipo} onChange={handleChange}>
                 <option value="general">Consulta general</option>
                 <option value="presupuesto">Presupuesto</option>
-                <option value="servicio">InformaciÃ³n de servicio</option>
+                <option value="servicio">Información de servicio</option>
                 <option value="otro">Otro</option>
               </select>
             </label>
@@ -142,7 +142,7 @@ export default function Contact() {
                 id="mensaje"
                 name="mensaje"
                 rows="5"
-                placeholder="CuÃ©ntanos el tipo de espacio y la frecuencia que te interesarÃ­a"
+                placeholder="Cuéntanos el tipo de espacio y la frecuencia que te interesaría"
                 value={formData.mensaje}
                 onChange={handleChange}
                 required
@@ -157,10 +157,10 @@ export default function Contact() {
 
           <aside className="contact-info">
             <div className="info-card">
-              <h3>QuÃ© puedes esperar</h3>
+              <h3>Qué puedes esperar</h3>
               <p className="info-card-copy">Te damos una propuesta clara, tiempos realistas y precios transparentes desde el primer contacto.</p>
               <ul>
-                <li>Respuesta rÃ¡pida y sin vueltas</li>
+                <li>Respuesta rápida y sin vueltas</li>
                 <li>Plan de limpieza adaptado a tu horario</li>
                 <li>Seguimiento para que todo quede bien cerrado</li>
               </ul>
