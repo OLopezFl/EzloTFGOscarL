@@ -77,7 +77,8 @@ export default function FAQ() {
       <section className="faq-hero">
         <div className="container">
           <div className="faq-hero-content">
-            <h1>Preguntas frecuentes</h1>
+            <p className="faq-eyebrow">Preguntas frecuentes</p>
+            <h1>Todo lo que necesitas saber</h1>
             <p>Respuestas claras sobre cómo trabajamos</p>
           </div>
         </div>

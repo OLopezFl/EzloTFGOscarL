@@ -9,8 +9,10 @@
     linear-gradient(110deg, rgba(6, 16, 10, 0.74) 0%, rgba(8, 21, 13, 0.62) 55%, rgba(8, 21, 13, 0.78) 100%),
     var(--img-lobby) center center / cover no-repeat;
   margin-top: 0;
-  padding: calc(clamp(3rem, 5vw, 4rem) + var(--header-bar, 76px)) 0 clamp(2rem, 4vw, 3rem);
+  padding: clamp(2rem, 4vw, 3rem) 0;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .hero-overlay {
@@ -29,6 +31,7 @@
   grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: clamp(1.25rem, 3.5vw, 2.25rem);
   align-items: center;
+  justify-items: center;
 }
 
 .hero-text,
@@ -38,7 +41,7 @@
 
 .hero-text h1 {
   margin: 0 0 0;
-  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
   line-height: 1.04;
   color: #ffffff;
   font-weight: 700;
@@ -53,7 +56,7 @@
   margin-top: 1rem;
   max-width: min(58ch, 100%);
   color: rgba(255, 255, 255, 0.86);
-  font-size: clamp(1rem, 0.35vw + 0.92rem, 1.12rem);
+  font-size: clamp(0.85rem, 0.25vw + 0.8rem, 1rem);
   line-height: 1.75;
 }
 
@@ -68,10 +71,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
+  min-height: 44px;
   border-radius: 999px;
-  padding: 0.8rem 1.4rem;
-  font-size: 0.97rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-decoration: none;
   border: 1.2px solid transparent;

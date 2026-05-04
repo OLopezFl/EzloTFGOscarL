@@ -6,26 +6,38 @@
 .faq-hero {
   position: relative;
   overflow: hidden;
-  min-height: clamp(380px, 42vh, 520px);
+  min-height: clamp(420px, 50vh, 600px);
   background:
-    linear-gradient(160deg, rgba(6, 18, 10, 0.58) 0%, rgba(8, 22, 14, 0.72) 60%, rgba(5, 15, 9, 0.82) 100%),
-    var(--img-lobby) center 60% / cover no-repeat;
+    linear-gradient(105deg, rgba(4, 18, 10, 0.82) 0%, rgba(8, 24, 14, 0.54) 50%, rgba(10, 26, 16, 0.70) 100%),
+    var(--img-lobby) center 40% / cover no-repeat;
   margin-top: 0;
-  padding: calc(clamp(4rem, 6.5vw, 5.1rem) + var(--header-bar, 76px)) 0 clamp(2.75rem, 5.5vw, 4rem);
+  padding: clamp(2rem, 4vw, 3rem) 0;
   text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.faq-eyebrow {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .faq-hero-content h1 {
   margin: 0;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  line-height: 1.04;
   color: #ffffff;
   font-weight: 700;
-  line-height: 1.1;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .faq-hero-content p {
   margin-top: 1rem;
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 0.25vw + 0.8rem, 1rem);
   color: rgba(255, 255, 255, 0.86);
   line-height: 1.75;
 }

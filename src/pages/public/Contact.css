@@ -6,14 +6,15 @@
 .contact-hero {
   position: relative;
   overflow: hidden;
-  min-height: clamp(420px, 48vh, 560px);
+  min-height: clamp(420px, 50vh, 600px);
   contain: paint;
   margin-top: 0;
-  padding: calc(clamp(4rem, 6vw, 5rem) + var(--header-bar, 76px)) var(--layout-gutter)
-    clamp(2.25rem, 4vw, 2.9rem);
+  padding: clamp(2rem, 4vw, 3rem) var(--layout-gutter);
   background:
     linear-gradient(125deg, rgba(5, 14, 9, 0.86) 0%, rgba(8, 22, 14, 0.60) 48%, rgba(10, 26, 16, 0.64) 100%),
     var(--img-lobby) 30% center / cover no-repeat;
+  display: flex;
+  align-items: center;
 }
 
 .contact-hero-inner {
@@ -35,21 +36,20 @@
 }
 
 .contact-hero h1 {
-  margin: 0.75rem 0 0;
-  font-size: clamp(2.35rem, 4.4vw, 3.8rem);
-  letter-spacing: -0.02em;
+  margin: 0;
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
   line-height: 1.04;
   color: #ffffff;
-  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+  font-weight: 700;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .contact-hero p {
-  margin-top: 0.9rem;
-  color: rgba(255, 255, 255, 0.88);
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.86);
   max-width: 62ch;
-  font-size: 1.06rem;
-  line-height: 1.7;
-  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  font-size: clamp(0.85rem, 0.25vw + 0.8rem, 1rem);
+  line-height: 1.75;
 }
 
 .contact-section {
