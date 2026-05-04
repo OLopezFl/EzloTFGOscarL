@@ -1965,7 +1965,7 @@ export default function Dashboard() {
     clearFeedback();
 
     if (!plantillaForm.id_cliente) {
-      const msg = 'Selecciona un cliente para guardar la plantilla.';
+      const msg = 'Selecciona un cliente para guardar el Plan.';
       showError(msg);
       pushFormNotification('error', msg);
       return;
@@ -1973,7 +1973,7 @@ export default function Dashboard() {
 
     const duration = Number(plantillaForm.duracion_minutos || 60);
     if (!duration || duration < 15 || duration % 15 !== 0) {
-      const msg = 'La duracion de plantilla debe ser multiplo de 15 minutos.';
+      const msg = 'La duracion del Plan debe ser multiplo de 15 minutos.';
       showError(msg);
       pushFormNotification('error', msg);
       return;
@@ -2036,10 +2036,10 @@ export default function Dashboard() {
         }),
       });
 
-      showSuccess(`Trabajo(s) generado(s) desde plantilla para ${dias} dia(s).`);
+      showSuccess(`Trabajo(s) generado(s) desde Plan para ${dias} dia(s).`);
       await loadModuleData('calendario', { force: true, showLoader: false });
     } catch (error) {
-      showError(error.message || 'No se pudo generar trabajos desde plantilla.');
+      showError(error.message || 'No se pudo generar trabajos desde Plan.');
     }
   };
 
@@ -2047,10 +2047,10 @@ export default function Dashboard() {
     clearFeedback();
     try {
       await apiRequest(`/api/trabajos-plantillas/${idPlantilla}`, { method: 'DELETE' });
-      showSuccess('Plantilla eliminada.');
+      showSuccess('Plan eliminado.');
       await loadModuleData('calendario', { force: true, showLoader: false });
     } catch (error) {
-      showError(error.message || 'No se pudo eliminar la plantilla.');
+      showError(error.message || 'No se pudo eliminar el Plan.');
     }
   };
 
@@ -2291,12 +2291,12 @@ export default function Dashboard() {
 
           <div className="trabajos-content">
             <section className="trabajos-surface">
-              <h3 className="trabajos-section-title">Crear plantilla</h3>
+              <h3 className="trabajos-section-title">Crear Plan</h3>
               <form className="pending-create-form trabajos-form" onSubmit={onCreatePlantillaTrabajo}>
                 <div className="trabajos-form-grid">
                   <input
                     type="text"
-                    placeholder="Nombre plantilla"
+                    placeholder="Nombre Plan"
                     value={plantillaForm.nombre}
                     onChange={(event) => setPlantillaForm((prev) => ({ ...prev, nombre: event.target.value }))}
                     required
@@ -2386,15 +2386,15 @@ export default function Dashboard() {
                   />
                 </div>
 
-                <button type="submit" className="solid-btn">Guardar plantilla</button>
+                <button type="submit" className="solid-btn">Guardar Plan</button>
               </form>
             </section>
 
             <section className="trabajos-surface trabajos-surface-list">
-              <h3 className="trabajos-section-title trabajos-list-title">Plantillas guardadas</h3>
+              <h3 className="trabajos-section-title trabajos-list-title">Planes guardados</h3>
               <div className="template-list trabajos-template-list">
                 {plantillasTrabajo.length === 0 && (
-                  <p className="empty-hint">No hay plantillas guardadas.</p>
+                  <p className="empty-hint">No hay planes guardados.</p>
                 )}
                 {plantillasTrabajo.map((plantilla) => (
                   <div key={plantilla.id_plantilla} className="template-item">
