@@ -8,7 +8,7 @@ import FAQ from './pages/public/FAQ';
 import Login from './pages/public/Login';
 import NotFound from './pages/public/NotFound';
 import ServerError from './pages/public/ServerError';
-import Dashboard from './pages/dashboard/Dashboard';
+import Dashboard from './pages/public/Dashboard';
 
 export default function SpaRoutes() {
   return (

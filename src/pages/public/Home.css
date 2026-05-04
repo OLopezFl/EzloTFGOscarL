@@ -4,12 +4,12 @@
 
 .hero-section {
   position: relative;
-  min-height: clamp(520px, 58vh, 720px);
+  min-height: clamp(420px, 50vh, 600px);
   background:
     linear-gradient(110deg, rgba(6, 16, 10, 0.74) 0%, rgba(8, 21, 13, 0.62) 55%, rgba(8, 21, 13, 0.78) 100%),
     var(--img-lobby) center center / cover no-repeat;
   margin-top: 0;
-  padding: calc(clamp(4.25rem, 7vw, 5.75rem) + var(--header-bar, 76px)) 0 clamp(3rem, 6vw, 4.5rem);
+  padding: calc(clamp(3rem, 5vw, 4rem) + var(--header-bar, 76px)) 0 clamp(2rem, 4vw, 3rem);
   overflow: hidden;
 }
 
