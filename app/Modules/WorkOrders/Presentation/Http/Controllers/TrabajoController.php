@@ -38,9 +38,42 @@ class TrabajoController extends Controller
         return $this->trabajos->updateAgenda($request, $id);
     }
 
-    public function storeFromPlantilla(Request $request): JsonResponse
+    public function storeFromPlantilla(Request $request, int $plantillaId): JsonResponse
     {
+        $request->merge(['id_plantilla' => $plantillaId]);
+
         return $this->trabajos->storeFromPlantilla($request);
+    }
+
+    public function cambiarEstado(Request $request, int $id): JsonResponse
+    {
+        $user = $request->attributes->get('auth_user');
+
+        if ($user && $user->rol === 'Admin') {
+            return $this->trabajos->updateEstado($request, $id);
+        }
+
+        $validated = $request->validate([
+            'estado' => ['required', 'string', 'in:en_curso,pausado,finalizado'],
+        ]);
+
+        $estadoNuevo = $validated['estado'];
+        $trabajo = \App\Modules\WorkOrders\Domain\Models\Trabajo::findOrFail($id);
+        $estadoActual = strtolower((string) $trabajo->estado);
+
+        if ($estadoNuevo === 'en_curso') {
+            if ($estadoActual === 'pausado') {
+                return $this->trabajos->reanudarTrabajo($request, $id);
+            }
+
+            return $this->trabajos->iniciarTrabajo($request, $id);
+        }
+
+        if ($estadoNuevo === 'pausado') {
+            return $this->trabajos->pausarTrabajo($request, $id);
+        }
+
+        return $this->trabajos->finalizarTrabajo($request, $id);
     }
 
     public function destroy(int $id): JsonResponse

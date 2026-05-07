@@ -22,7 +22,7 @@ export default function Login() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(buildApiUrl('/api/login'), {
+      const response = await fetch(buildApiUrl('/api/v1/sesiones'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

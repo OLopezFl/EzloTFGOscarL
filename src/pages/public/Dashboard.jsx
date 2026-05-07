@@ -523,27 +523,27 @@ export default function Dashboard() {
   };
 
   const fetchClientes = async () => {
-    const data = await apiRequest('/api/clientes');
+    const data = await apiRequest('/api/v1/clientes');
     setClientes(data);
   };
 
   const fetchMensajes = async () => {
-    const data = await apiRequest('/api/formularios');
+    const data = await apiRequest('/api/v1/formularios');
     setMensajes(data);
   };
 
   const fetchTrabajos = async () => {
-    const data = await apiRequest('/api/trabajos');
+    const data = await apiRequest('/api/v1/trabajos');
     setTrabajos(data);
   };
 
   const fetchPlantillasTrabajo = async () => {
-    const data = await apiRequest('/api/trabajos-plantillas');
+    const data = await apiRequest('/api/v1/trabajos-plantillas');
     setPlantillasTrabajo(data);
   };
 
   const fetchUsuarios = async () => {
-    const data = await apiRequest('/api/usuarios');
+    const data = await apiRequest('/api/v1/usuarios');
     setUsuarios(data);
   };
 
@@ -552,7 +552,7 @@ export default function Dashboard() {
       setJornadaActual(null);
       return;
     }
-    const data = await apiRequest('/api/jornada/actual');
+    const data = await apiRequest('/api/v1/jornadas/activa');
     setJornadaActual(data?.registro || null);
   };
 
@@ -562,7 +562,7 @@ export default function Dashboard() {
     if (range.desde) params.set('desde', range.desde);
     if (range.hasta) params.set('hasta', range.hasta);
 
-    const data = await apiRequest(`/api/jornada/auditoria${params.toString() ? `?${params.toString()}` : ''}`);
+    const data = await apiRequest(`/api/v1/jornadas/auditorias${params.toString() ? `?${params.toString()}` : ''}`);
     setAuditoriaJornadas(Array.isArray(data) ? data : []);
   };
 
@@ -572,7 +572,7 @@ export default function Dashboard() {
     if (range.desde) params.set('desde', range.desde);
     if (range.hasta) params.set('hasta', range.hasta);
 
-    const data = await apiRequest(`/api/trabajos/auditoria-ajustes${params.toString() ? `?${params.toString()}` : ''}`);
+    const data = await apiRequest(`/api/v1/trabajos/auditorias${params.toString() ? `?${params.toString()}` : ''}`);
     setAuditoriaAjustesTrabajos(Array.isArray(data) ? data : []);
   };
 
@@ -584,8 +584,8 @@ export default function Dashboard() {
     const query = params.toString() ? `?${params.toString()}` : '';
 
     const [empleadosData, clientesData] = await Promise.all([
-      apiRequest(`/api/analitica/eficiencia-empleados${query}`),
-      apiRequest(`/api/analitica/desviacion-clientes${query}`),
+      apiRequest(`/api/v1/analiticas/eficiencia-empleados${query}`),
+      apiRequest(`/api/v1/analiticas/desviacion-clientes${query}`),
     ]);
     setEficienciaEmpleados(Array.isArray(empleadosData) ? empleadosData : []);
     setDesviacionClientes(Array.isArray(clientesData) ? clientesData : []);
@@ -598,7 +598,7 @@ export default function Dashboard() {
   };
 
   const fetchProfile = async () => {
-    const data = await apiRequest(`/api/usuarios/${user.id_usuario}`);
+    const data = await apiRequest(`/api/v1/usuarios/${user.id_usuario}`);
 
     setProfileForm({
       nombre: data.nombre || '',
@@ -622,7 +622,7 @@ export default function Dashboard() {
   const refreshPendingInboxCount = async () => {
     if (!isAdmin) return;
     try {
-      const data = await apiRequest('/api/formularios?estado=Pendiente');
+      const data = await apiRequest('/api/v1/formularios?estado=Pendiente');
       const nextCount = Array.isArray(data) ? data.length : 0;
       setPendingInboxCount(nextCount);
 
@@ -995,7 +995,7 @@ export default function Dashboard() {
 
     try {
       if (editClienteId) {
-        await apiRequest(`/api/clientes/${editClienteId}`, {
+        await apiRequest(`/api/v1/clientes/${editClienteId}`, {
           method: 'PUT',
           body: JSON.stringify({
             nombre: clienteForm.nombre.trim(),
@@ -1008,7 +1008,7 @@ export default function Dashboard() {
         showSuccess(msg);
         pushFormNotification('success', msg);
       } else {
-        await apiRequest('/api/clientes', {
+        await apiRequest('/api/v1/clientes', {
           method: 'POST',
           body: JSON.stringify({
             nombre: clienteForm.nombre.trim(),
@@ -1033,7 +1033,7 @@ export default function Dashboard() {
   const onDeleteCliente = async (idCliente) => {
     clearFeedback();
     try {
-      await apiRequest(`/api/clientes/${idCliente}`, { method: 'DELETE' });
+      await apiRequest(`/api/v1/clientes/${idCliente}`, { method: 'DELETE' });
       showSuccess('Cliente eliminado.');
       if (editClienteId === idCliente) resetClienteForm();
       await loadModuleData('clientes', { force: true, showLoader: false });
@@ -1045,7 +1045,7 @@ export default function Dashboard() {
   const onMarkLeido = async (idMensaje) => {
     clearFeedback();
     try {
-      await apiRequest(`/api/formularios/${idMensaje}/estado`, {
+      await apiRequest(`/api/v1/formularios/${idMensaje}/estado`, {
         method: 'PATCH',
         body: JSON.stringify({ estado: 'Leído' }),
       });
@@ -1059,7 +1059,7 @@ export default function Dashboard() {
   const onDeleteMensaje = async (idMensaje) => {
     clearFeedback();
     try {
-      await apiRequest(`/api/formularios/${idMensaje}`, {
+      await apiRequest(`/api/v1/formularios/${idMensaje}`, {
         method: 'DELETE',
       });
       showSuccess('Mensaje eliminado.');
@@ -1264,7 +1264,7 @@ export default function Dashboard() {
     }));
 
     try {
-      await apiRequest(`/api/trabajos/${idTrabajo}/agenda`, {
+      await apiRequest(`/api/v1/trabajos/${idTrabajo}/agenda`, {
         method: 'PATCH',
         body: JSON.stringify({
           id_asignacion: payload.type === 'assignment' ? payload.id_asignacion : null,
@@ -1440,7 +1440,7 @@ export default function Dashboard() {
     }));
 
     try {
-      await apiRequest(`/api/trabajos/${idTrabajo}/agenda`, {
+      await apiRequest(`/api/v1/trabajos/${idTrabajo}/agenda`, {
         method: 'PATCH',
         body: JSON.stringify({
           id_asignacion: payload.id_asignacion,
@@ -1497,7 +1497,7 @@ export default function Dashboard() {
     }));
 
     try {
-      await apiRequest(`/api/trabajos/${idTrabajo}/agenda`, {
+      await apiRequest(`/api/v1/trabajos/${idTrabajo}/agenda`, {
         method: 'PATCH',
         body: JSON.stringify({
           id_asignacion: previousSnapshot.id_asignacion,
@@ -1521,7 +1521,7 @@ export default function Dashboard() {
     clearFeedback();
     setIsSavingJornada(true);
     try {
-      await apiRequest('/api/jornada/iniciar', {
+      await apiRequest('/api/v1/jornadas', {
         method: 'POST',
         body: JSON.stringify({ empleado_id: user.id_usuario }),
       });
@@ -1539,8 +1539,8 @@ export default function Dashboard() {
     clearFeedback();
     setIsSavingJornada(true);
     try {
-      await apiRequest('/api/jornada/finalizar', {
-        method: 'POST',
+      await apiRequest('/api/v1/jornadas/activa', {
+        method: 'PATCH',
         body: JSON.stringify({ empleado_id: user.id_usuario }),
       });
       showSuccess('Jornada finalizada.');
@@ -1559,9 +1559,15 @@ export default function Dashboard() {
     setCompletingTrabajoId(idTrabajo);
 
     try {
-      await apiRequest(`/api/trabajos/${idTrabajo}/${action}`, {
-        method: 'POST',
-        body: JSON.stringify({ empleado_id: user.id_usuario, ...payload }),
+      const estadoMap = {
+        iniciar: 'en_curso',
+        pausar: 'pausado',
+        reanudar: 'en_curso',
+        finalizar: 'finalizado',
+      };
+      await apiRequest(`/api/v1/trabajos/${idTrabajo}/estado`, {
+        method: 'PATCH',
+        body: JSON.stringify({ estado: estadoMap[action], empleado_id: user.id_usuario, ...payload }),
       });
 
       const labels = {
@@ -1718,7 +1724,7 @@ export default function Dashboard() {
     setIsSavingRetrasoEdit(true);
 
     try {
-      await apiRequest(`/api/trabajos/${editRetrasoModal.id}/retraso`, {
+      await apiRequest(`/api/v1/trabajos/${editRetrasoModal.id}/retraso`, {
         method: 'PATCH',
         body: JSON.stringify({
           tiempo_estimado: tiempoEstimado,
@@ -1856,8 +1862,8 @@ export default function Dashboard() {
 
       const token = localStorage.getItem('ezlo_token');
 
-      const response = await fetch(buildApiUrl(`/api/usuarios/${user.id_usuario}/perfil`), {
-        method: 'POST',
+      const response = await fetch(buildApiUrl(`/api/v1/usuarios/${user.id_usuario}/perfil`), {
+        method: 'PATCH',
         headers: {
           Accept: 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -1929,7 +1935,7 @@ export default function Dashboard() {
     }
 
     try {
-      await apiRequest('/api/trabajos', {
+      await apiRequest('/api/v1/trabajos', {
         method: 'POST',
         body: JSON.stringify({
           id_cliente: Number(trabajoForm.id_cliente),
@@ -1980,7 +1986,7 @@ export default function Dashboard() {
     }
 
     try {
-      await apiRequest('/api/trabajos-plantillas', {
+      await apiRequest('/api/v1/trabajos-plantillas', {
         method: 'POST',
         body: JSON.stringify({
           nombre: plantillaForm.nombre.trim(),
@@ -2026,10 +2032,9 @@ export default function Dashboard() {
     }
 
     try {
-      await apiRequest('/api/trabajos/desde-plantilla', {
+      await apiRequest(`/api/v1/trabajos-plantillas/${Number(idPlantilla)}/trabajos`, {
         method: 'POST',
         body: JSON.stringify({
-          id_plantilla: Number(idPlantilla),
           fecha_base: programarFechaBase || null,
           hora_inicio: programarFechaBase ? programarHoraInicio : null,
           dias_consecutivos: dias,
@@ -2046,7 +2051,7 @@ export default function Dashboard() {
   const onDeletePlantilla = async (idPlantilla) => {
     clearFeedback();
     try {
-      await apiRequest(`/api/trabajos-plantillas/${idPlantilla}`, { method: 'DELETE' });
+      await apiRequest(`/api/v1/trabajos-plantillas/${idPlantilla}`, { method: 'DELETE' });
       showSuccess('Plan eliminado.');
       await loadModuleData('calendario', { force: true, showLoader: false });
     } catch (error) {
@@ -2079,7 +2084,7 @@ export default function Dashboard() {
   const onDeleteEmpleado = async (idUsuario) => {
     clearFeedback();
     try {
-      await apiRequest(`/api/usuarios/${idUsuario}`, { method: 'DELETE' });
+      await apiRequest(`/api/v1/usuarios/${idUsuario}`, { method: 'DELETE' });
       if (Number(editEmployeeId) === Number(idUsuario)) {
         resetEmployeeForm();
       }
@@ -2107,7 +2112,7 @@ export default function Dashboard() {
       }
 
       if (editEmployeeId) {
-        await apiRequest(`/api/usuarios/${editEmployeeId}`, {
+        await apiRequest(`/api/v1/usuarios/${editEmployeeId}`, {
           method: 'PUT',
           body: JSON.stringify(payload),
         });
@@ -2122,7 +2127,7 @@ export default function Dashboard() {
           return;
         }
 
-        await apiRequest('/api/usuarios', {
+        await apiRequest('/api/v1/usuarios', {
           method: 'POST',
           body: JSON.stringify({
             ...payload,

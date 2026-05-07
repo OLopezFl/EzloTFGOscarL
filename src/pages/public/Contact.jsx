@@ -33,7 +33,7 @@ export default function Contact() {
         formData.mensaje.trim(),
       ].filter(Boolean);
 
-      const response = await fetch(buildApiUrl('/api/formularios'), {
+      const response = await fetch(buildApiUrl('/api/v1/formularios'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

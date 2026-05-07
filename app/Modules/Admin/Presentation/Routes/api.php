@@ -7,19 +7,19 @@ use App\Modules\PublicSite\Presentation\Http\Controllers\FormularioController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['api.auth', 'role:Admin'])->group(function () {
-    Route::get('/dashboard/summary', [DashboardController::class, 'summary']);
-    Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
-    Route::get('/dashboard/calendar', [DashboardController::class, 'calendar']);
+    Route::get('/api/v1/dashboard/resumen', [DashboardController::class, 'summary']);
+    Route::get('/api/v1/dashboard/estadisticas', [DashboardController::class, 'stats']);
+    Route::get('/api/v1/dashboard/calendario', [DashboardController::class, 'calendar']);
 
-    Route::get('/usuarios', [UsuarioController::class, 'index']);
-    Route::post('/usuarios', [UsuarioController::class, 'store']);
-    Route::put('/usuarios/{id}', [UsuarioController::class, 'update']);
-    Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy']);
+    Route::get('/api/v1/usuarios', [UsuarioController::class, 'index']);
+    Route::post('/api/v1/usuarios', [UsuarioController::class, 'store']);
+    Route::put('/api/v1/usuarios/{id}', [UsuarioController::class, 'update']);
+    Route::delete('/api/v1/usuarios/{id}', [UsuarioController::class, 'destroy']);
 
-    Route::get('/analitica/eficiencia-empleados', [AnaliticaController::class, 'eficienciaPorEmpleado']);
-    Route::get('/analitica/desviacion-clientes', [AnaliticaController::class, 'desviacionPorClienteUbicacion']);
+    Route::get('/api/v1/analiticas/eficiencia-empleados', [AnaliticaController::class, 'eficienciaPorEmpleado']);
+    Route::get('/api/v1/analiticas/desviacion-clientes', [AnaliticaController::class, 'desviacionPorClienteUbicacion']);
 
-    Route::get('/formularios', [FormularioController::class, 'index']);
-    Route::patch('/formularios/{id}/estado', [FormularioController::class, 'updateEstado']);
-    Route::delete('/formularios/{id}', [FormularioController::class, 'destroy']);
+    Route::get('/api/v1/formularios', [FormularioController::class, 'index']);
+    Route::patch('/api/v1/formularios/{id}/estado', [FormularioController::class, 'updateEstado']);
+    Route::delete('/api/v1/formularios/{id}', [FormularioController::class, 'destroy']);
 });
