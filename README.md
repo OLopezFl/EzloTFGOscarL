@@ -26,3 +26,7 @@ Abrir en navegador:
 o
 
 1. composer run dev
+
+## Credenciales admin
+Usuario: Admin
+Contraseña: admin1234
