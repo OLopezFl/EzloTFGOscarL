@@ -1847,6 +1847,7 @@ export default function Dashboard() {
 
     try {
       const formData = new FormData();
+      formData.append('_method', 'PATCH');
       formData.append('nombre', (profileForm.nombre || '').trim());
       formData.append('apellidos', (profileForm.apellidos || '').trim());
       formData.append('username', (profileForm.username || '').trim());
@@ -1863,7 +1864,7 @@ export default function Dashboard() {
       const token = localStorage.getItem('ezlo_token');
 
       const response = await fetch(buildApiUrl(`/api/v1/usuarios/${user.id_usuario}/perfil`), {
-        method: 'PATCH',
+        method: 'POST',
         headers: {
           Accept: 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
