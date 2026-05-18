@@ -2834,7 +2834,9 @@ export default function Dashboard() {
                                 <div className="calendar-job-head">
                                   <p>{trabajo.cliente?.nombre || 'Cliente'}</p>
                                 </div>
-                                <small className="calendar-job-status">{trabajo.estado}</small>
+                                <small className="calendar-job-status">
+                                  {String(trabajo.observaciones || '').trim() || 'Sin observaciones'}
+                                </small>
                                 <span className="calendar-inline-status">
                                   {estadoTrabajoLabel(trabajo.estado)}
                                 </span>
