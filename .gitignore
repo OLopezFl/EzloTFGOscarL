@@ -64,3 +64,9 @@ dist/
 # Temporary files
 *.tmp
 *.temp
+
+**/caddy
+frankenphp
+frankenphp-worker.php
+rr
+.rr.yaml
